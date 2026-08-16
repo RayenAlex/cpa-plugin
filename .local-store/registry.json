@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "plugins": [
+    {
+      "id": "quota-center",
+      "name": "额度中心",
+      "description": "多供应商额度中心，查看智谱、MiniMax、方舟、Grok、Codex、Gemini 额度。",
+      "author": "rayen",
+      "version": "0.2.0",
+      "repository": "https://github.com/RayenAlex/quota-center",
+      "homepage": "https://github.com/RayenAlex/quota-center",
+      "license": "MIT",
+      "tags": [
+        "Management",
+        "Usage",
+        "Zhipu",
+        "GLM"
+      ],
+      "install": {
+        "type": "direct",
+        "artifacts": [
+          {
+            "goos": "darwin",
+            "goarch": "arm64",
+            "url": "http://127.0.0.1:18080/artifacts/quota-center_0.2.0_darwin_arm64.zip",
+            "sha256": "da18862325a372245826effb2ea12b0a249de23d4debca6a63257a8ebaeff8ed"
+          },
+          {
+            "goos": "linux",
+            "goarch": "arm64",
+            "url": "http://127.0.0.1:18080/artifacts/quota-center_0.2.0_linux_arm64.zip",
+            "sha256": "739165af3ed0b199c531ed5147e08b747de7f26b07ad39d810eed1512fb14ff2"
+          }
+        ]
+      }
+    }
+  ]
+}

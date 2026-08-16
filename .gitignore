@@ -1,0 +1,13 @@
+.DS_Store
+.superpowers/
+__pycache__/
+dist/
+.local-store/artifacts/
+*.dylib
+*.so
+*.dll
+*.h
+*.zip
+*.sha256
+!artifacts/*.zip
+docs/superpowers
