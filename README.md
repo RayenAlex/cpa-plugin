@@ -21,11 +21,12 @@ ZIP 根目录只包含平台动态库：
 
 ~~~text
 quota-center_0.2.1_linux_amd64.zip    # quota-center.so
-quota-center_0.2.1_darwin_arm64.zip        # quota-center.dylib
-cpa-quota-warmup_0.2.2_darwin_arm64.zip    # cpa-quota-warmup.dylib
+quota-center_0.2.1_darwin_arm64.zip                   # quota-center.dylib
+cpa-quota-warmup_<version>_linux_amd64.zip            # cpa-quota-warmup.so
+cpa-quota-warmup_<version>_linux_arm64.zip            # cpa-quota-warmup.so
 ~~~
 
-`quota-center` 的源码、构建和 Release 工作流位于 [RayenAlex/quota-center](https://github.com/RayenAlex/quota-center)。`cpa-quota-warmup` 的商店工件从上游 [v0.2.2](https://github.com/szxypi/cpa-quota-warmup/tree/v0.2.2) 源码构建；当前收录 Darwin arm64 工件。
+`quota-center` 的源码、构建和 Release 工作流位于 [RayenAlex/quota-center](https://github.com/RayenAlex/quota-center)。`cpa-quota-warmup` 使用上游 GitHub Release 发布的 Linux amd64 与 Linux arm64 工件。
 
 本仓库只维护商店 registry、可安装工件和校验工具。
 
@@ -67,15 +68,7 @@ plugins:
 
 插件商店安装会自动按 `GOOS/GOARCH` 选择工件并校验 SHA-256。
 
-`cpa-quota-warmup` 当前提供 Darwin arm64 工件：
-
-~~~bash
-curl -L -o cpa-quota-warmup_0.2.2_darwin_arm64.zip \
-  https://raw.githubusercontent.com/RayenAlex/cpa-plugin/main/artifacts/cpa-quota-warmup_0.2.2_darwin_arm64.zip
-unzip cpa-quota-warmup_0.2.2_darwin_arm64.zip
-~~~
-
-将解压出的 `cpa-quota-warmup.dylib` 放入 CPA 插件目录，并在 `plugins.configs.cpa-quota-warmup` 中启用。其完整配置项与工作机制请见 [上游 README](https://github.com/szxypi/cpa-quota-warmup#readme)。
+`cpa-quota-warmup` 当前提供 Linux amd64 与 Linux arm64 工件。请优先从插件商店安装；它会自动选择对应平台、下载上游 Release ZIP 并验证 SHA-256。完整配置项与工作机制请见 [上游 README](https://github.com/szxypi/cpa-quota-warmup#readme)。
 
 ## 远程更新
 
@@ -89,7 +82,7 @@ https://raw.githubusercontent.com/RayenAlex/cpa-plugin/main/registry.json
 
 ## Registry 与验证
 
-正式 registry 位于 [registry.json](registry.json)，当前包含 `quota-center` `0.2.1` 与 `cpa-quota-warmup` `0.2.2`。前者引用独立仓库的 GitHub Release；后者引用本仓库托管、由上游 `v0.2.2` 源码构建的 Darwin arm64 工件。
+正式 registry 位于 [registry.json](registry.json)。`quota-center` 引用独立仓库的 GitHub Release；`cpa-quota-warmup` 由同步工作流引用其最新稳定上游 Release 的 Linux 工件与 SHA-256。
 
 本地验证：
 
@@ -102,3 +95,7 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 ~~~
 
 `check-registry-artifacts.py` 会检查 Release URL 的平台、版本、文件名及 SHA-256 格式。
+
+## 自动同步 `cpa-quota-warmup`
+
+[同步工作流](.github/workflows/sync-cpa-quota-warmup.yml) 每 6 小时运行一次，也可从 GitHub Actions 手动触发。它读取上游最新稳定 Release，要求 Linux amd64 与 Linux arm64 ZIP 均已发布，然后用其版本与 SHA-256 更新 `registry.json`、运行验证并自动提交。

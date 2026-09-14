@@ -1,6 +1,4 @@
-import hashlib
 import json
-import zipfile
 import subprocess
 import sys
 import unittest
@@ -40,11 +38,10 @@ class RegistryArtifactTest(unittest.TestCase):
         }
         self.assertEqual(actual, expected)
 
-    def test_quota_warmup_packages_the_upstream_v0_2_2_plugin(self):
+    def test_quota_warmup_tracks_supported_upstream_release_artifacts(self):
         self.assertIn("cpa-quota-warmup", self.plugins)
         plugin = self.plugins["cpa-quota-warmup"]
         self.assertEqual(plugin["name"], "额度预热")
-        self.assertEqual(plugin["version"], "0.2.2")
         self.assertEqual(plugin["author"], "szxypi")
         self.assertEqual(
             plugin["repository"], "https://github.com/szxypi/cpa-quota-warmup"
@@ -53,32 +50,24 @@ class RegistryArtifactTest(unittest.TestCase):
             plugin["homepage"], "https://github.com/szxypi/cpa-quota-warmup"
         )
         self.assertEqual(plugin["license"], "MIT")
+        self.assertRegex(plugin["version"], r"^[0-9][0-9A-Za-z.+-]*$")
 
+        version = plugin["version"]
+        expected_platforms = {("linux", "amd64"), ("linux", "arm64")}
+        artifacts = plugin["install"]["artifacts"]
         self.assertEqual(
-            plugin["install"]["artifacts"],
-            [
-                {
-                    "goos": "darwin",
-                    "goarch": "arm64",
-                    "url": (
-                        "https://raw.githubusercontent.com/RayenAlex/cpa-plugin/"
-                        "main/artifacts/cpa-quota-warmup_0.2.2_darwin_arm64.zip"
-                    ),
-                    "sha256": (
-                        "9f7679ca4f918f98b3a8cc7b55f46d15af3dc21a1470f3f18412762a5afcf3c6"
-                    ),
-                }
-            ],
+            {(artifact["goos"], artifact["goarch"]) for artifact in artifacts},
+            expected_platforms,
         )
-
-        archive = self.root / "artifacts" / "cpa-quota-warmup_0.2.2_darwin_arm64.zip"
-        self.assertTrue(archive.is_file())
-        self.assertEqual(
-            hashlib.sha256(archive.read_bytes()).hexdigest(),
-            "9f7679ca4f918f98b3a8cc7b55f46d15af3dc21a1470f3f18412762a5afcf3c6",
-        )
-        with zipfile.ZipFile(archive) as package:
-            self.assertEqual(package.namelist(), ["cpa-quota-warmup.dylib"])
+        for artifact in artifacts:
+            goos = artifact["goos"]
+            goarch = artifact["goarch"]
+            self.assertEqual(
+                artifact["url"],
+                "https://github.com/szxypi/cpa-quota-warmup/releases/download/"
+                f"v{version}/cpa-quota-warmup_{version}_{goos}_{goarch}.zip",
+            )
+            self.assertRegex(artifact["sha256"], r"^[0-9a-f]{64}$")
 
     def test_registry_checker_accepts_store_and_release_artifacts(self):
         result = subprocess.run(
@@ -95,7 +84,7 @@ class RegistryArtifactTest(unittest.TestCase):
             text=True,
         )
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertIn("2 plugin(s), 3 artifact(s)", result.stdout)
+        self.assertIn("2 plugin(s), 4 artifact(s)", result.stdout)
 
     def test_store_contains_only_supported_standalone_plugin_entries(self):
         self.assertEqual(set(self.plugins), {"quota-center", "cpa-quota-warmup"})
