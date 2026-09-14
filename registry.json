@@ -33,6 +33,33 @@
           }
         ]
       }
+    },
+    {
+      "id": "cpa-quota-warmup",
+      "name": "额度预热",
+      "description": "按计划发送极短请求预热 CPA 认证账号的 5 小时额度窗口。",
+      "author": "szxypi",
+      "version": "0.2.2",
+      "repository": "https://github.com/szxypi/cpa-quota-warmup",
+      "homepage": "https://github.com/szxypi/cpa-quota-warmup",
+      "license": "MIT",
+      "tags": [
+        "Quota",
+        "Warmup",
+        "Scheduling",
+        "Usage"
+      ],
+      "install": {
+        "type": "direct",
+        "artifacts": [
+          {
+            "goos": "darwin",
+            "goarch": "arm64",
+            "url": "https://raw.githubusercontent.com/RayenAlex/cpa-plugin/main/artifacts/cpa-quota-warmup_0.2.2_darwin_arm64.zip",
+            "sha256": "9f7679ca4f918f98b3a8cc7b55f46d15af3dc21a1470f3f18412762a5afcf3c6"
+          }
+        ]
+      }
     }
   ]
 }
