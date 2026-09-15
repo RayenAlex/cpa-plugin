@@ -8,6 +8,7 @@
 |---|---|---|
 | `quota-center` | 多供应商额度中心：智谱、MiniMax、方舟、Codex、Gemini 和 Grok。支持 CPA 原生认证复用、手动账号和额度看板。 | [独立插件仓库](https://github.com/RayenAlex/quota-center) |
 | `cpa-quota-warmup` | 按计划用极短请求预热 CPA 认证账号的 5 小时额度窗口。 | [szxypi/cpa-quota-warmup](https://github.com/szxypi/cpa-quota-warmup) |
+| `cpa-devin-prompt-compat` | 为 Devin 模型请求替换会触发上游 403 content policy 的固定系统提示词措辞。 | [szxypi/cpa-devin-prompt-compat](https://github.com/szxypi/cpa-devin-prompt-compat) |
 
 ## 插件工件
 
@@ -24,9 +25,11 @@ quota-center_0.2.1_linux_amd64.zip    # quota-center.so
 quota-center_0.2.1_darwin_arm64.zip                   # quota-center.dylib
 cpa-quota-warmup_<version>_linux_amd64.zip            # cpa-quota-warmup.so
 cpa-quota-warmup_<version>_linux_arm64.zip            # cpa-quota-warmup.so
+cpa-devin-prompt-compat_0.1.1_linux_amd64.zip        # cpa-devin-prompt-compat.so
+cpa-devin-prompt-compat_0.1.1_linux_arm64.zip        # cpa-devin-prompt-compat.so
 ~~~
 
-`quota-center` 的源码、构建和 Release 工作流位于 [RayenAlex/quota-center](https://github.com/RayenAlex/quota-center)。`cpa-quota-warmup` 使用上游 GitHub Release 发布的 Linux amd64 与 Linux arm64 工件。
+`quota-center` 的源码、构建和 Release 工作流位于 [RayenAlex/quota-center](https://github.com/RayenAlex/quota-center)。`cpa-quota-warmup` 使用上游 GitHub Release 发布的 Linux amd64 与 Linux arm64 工件。`cpa-devin-prompt-compat` 同样使用上游 Release 发布的 Linux amd64 与 Linux arm64 工件。
 
 本仓库只维护商店 registry、可安装工件和校验工具。
 
@@ -43,7 +46,7 @@ plugins:
     - "https://raw.githubusercontent.com/RayenAlex/cpa-plugin/main/registry.json"
 ~~~
 
-刷新插件商店后，安装或更新 `quota-center` 或 `cpa-quota-warmup`。
+刷新插件商店后，安装或更新 `quota-center`、`cpa-quota-warmup` 或 `cpa-devin-prompt-compat`。
 
 ### 直接下载工件
 
@@ -70,6 +73,8 @@ plugins:
 
 `cpa-quota-warmup` 当前提供 Linux amd64 与 Linux arm64 工件。请优先从插件商店安装；它会自动选择对应平台、下载上游 Release ZIP 并验证 SHA-256。完整配置项与工作机制请见 [上游 README](https://github.com/szxypi/cpa-quota-warmup#readme)。
 
+`cpa-devin-prompt-compat` 当前也提供 Linux amd64 与 Linux arm64 工件。安装后在 `plugins.configs.cpa-devin-prompt-compat` 中启用；默认仅匹配 `devin/*` 模型。其替换规则与配置示例请见 [上游 README](https://github.com/szxypi/cpa-devin-prompt-compat#readme)。
+
 ## 远程更新
 
 在 CPA 插件商店中添加：
@@ -78,11 +83,11 @@ plugins:
 https://raw.githubusercontent.com/RayenAlex/cpa-plugin/main/registry.json
 ~~~
 
-然后在商店 UI 中安装或更新 `quota-center` 或 `cpa-quota-warmup`。
+然后在商店 UI 中安装或更新 `quota-center`、`cpa-quota-warmup` 或 `cpa-devin-prompt-compat`。
 
 ## Registry 与验证
 
-正式 registry 位于 [registry.json](registry.json)。`quota-center` 引用独立仓库的 GitHub Release；`cpa-quota-warmup` 由同步工作流引用其最新稳定上游 Release 的 Linux 工件与 SHA-256。
+正式 registry 位于 [registry.json](registry.json)。`quota-center` 与 `cpa-devin-prompt-compat` 引用各自上游的 GitHub Release；`cpa-quota-warmup` 由同步工作流引用其最新稳定上游 Release 的 Linux 工件与 SHA-256。
 
 本地验证：
 

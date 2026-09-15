@@ -66,6 +66,39 @@
           }
         ]
       }
+    },
+    {
+      "id": "cpa-devin-prompt-compat",
+      "name": "Devin Prompt Compat",
+      "description": "为 Devin 模型请求替换会触发上游 403 content policy 的固定系统提示词措辞。",
+      "author": "Scottio",
+      "version": "0.1.1",
+      "repository": "https://github.com/szxypi/cpa-devin-prompt-compat",
+      "homepage": "https://github.com/szxypi/cpa-devin-prompt-compat",
+      "license": "MIT",
+      "tags": [
+        "Devin",
+        "Claude",
+        "Compatibility",
+        "Request Interceptor"
+      ],
+      "install": {
+        "type": "direct",
+        "artifacts": [
+          {
+            "goos": "linux",
+            "goarch": "amd64",
+            "url": "https://github.com/szxypi/cpa-devin-prompt-compat/releases/download/v0.1.1/cpa-devin-prompt-compat_0.1.1_linux_amd64.zip",
+            "sha256": "1019c52d8693ff7406e777643a75b333b2f60737280523acd670f5c7a58be41e"
+          },
+          {
+            "goos": "linux",
+            "goarch": "arm64",
+            "url": "https://github.com/szxypi/cpa-devin-prompt-compat/releases/download/v0.1.1/cpa-devin-prompt-compat_0.1.1_linux_arm64.zip",
+            "sha256": "428a8a94077050781d104f8b5b3aada35c963f9fe102d2c2fb48e285c44b3962"
+          }
+        ]
+      }
     }
   ]
 }

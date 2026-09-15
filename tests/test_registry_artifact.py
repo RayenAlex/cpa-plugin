@@ -69,6 +69,49 @@ class RegistryArtifactTest(unittest.TestCase):
             )
             self.assertRegex(artifact["sha256"], r"^[0-9a-f]{64}$")
 
+    def test_devin_prompt_compat_uses_upstream_v0_1_1_release_archives(self):
+        self.assertIn("cpa-devin-prompt-compat", self.plugins)
+        plugin = self.plugins["cpa-devin-prompt-compat"]
+        self.assertEqual(plugin["name"], "Devin Prompt Compat")
+        self.assertEqual(plugin["version"], "0.1.1")
+        self.assertEqual(plugin["author"], "Scottio")
+        self.assertEqual(
+            plugin["repository"], "https://github.com/szxypi/cpa-devin-prompt-compat"
+        )
+        self.assertEqual(
+            plugin["homepage"], "https://github.com/szxypi/cpa-devin-prompt-compat"
+        )
+        self.assertEqual(plugin["license"], "MIT")
+        self.assertEqual(
+            plugin["install"]["artifacts"],
+            [
+                {
+                    "goos": "linux",
+                    "goarch": "amd64",
+                    "url": (
+                        "https://github.com/szxypi/cpa-devin-prompt-compat/"
+                        "releases/download/v0.1.1/"
+                        "cpa-devin-prompt-compat_0.1.1_linux_amd64.zip"
+                    ),
+                    "sha256": (
+                        "1019c52d8693ff7406e777643a75b333b2f60737280523acd670f5c7a58be41e"
+                    ),
+                },
+                {
+                    "goos": "linux",
+                    "goarch": "arm64",
+                    "url": (
+                        "https://github.com/szxypi/cpa-devin-prompt-compat/"
+                        "releases/download/v0.1.1/"
+                        "cpa-devin-prompt-compat_0.1.1_linux_arm64.zip"
+                    ),
+                    "sha256": (
+                        "428a8a94077050781d104f8b5b3aada35c963f9fe102d2c2fb48e285c44b3962"
+                    ),
+                },
+            ],
+        )
+
     def test_registry_checker_accepts_store_and_release_artifacts(self):
         result = subprocess.run(
             [
@@ -84,10 +127,13 @@ class RegistryArtifactTest(unittest.TestCase):
             text=True,
         )
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertIn("2 plugin(s), 4 artifact(s)", result.stdout)
+        self.assertIn("3 plugin(s), 6 artifact(s)", result.stdout)
 
     def test_store_contains_only_supported_standalone_plugin_entries(self):
-        self.assertEqual(set(self.plugins), {"quota-center", "cpa-quota-warmup"})
+        self.assertEqual(
+            set(self.plugins),
+            {"quota-center", "cpa-quota-warmup", "cpa-devin-prompt-compat"},
+        )
         self.assertFalse((self.root / "zhipu-quota").exists())
         self.assertFalse(
             (self.root / ".github" / "workflows" / "publish-linux-amd64.yml").exists()
