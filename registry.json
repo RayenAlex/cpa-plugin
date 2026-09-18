@@ -1,104 +1,131 @@
 {
-  "schema_version": 2,
-  "plugins": [
-    {
-      "id": "quota-center",
-      "name": "额度中心",
-      "description": "多供应商额度中心，查看智谱、MiniMax、方舟、Grok、Codex、Gemini 额度。",
-      "author": "rayen",
-      "version": "0.2.1",
-      "repository": "https://github.com/RayenAlex/quota-center",
-      "homepage": "https://github.com/RayenAlex/quota-center",
-      "license": "MIT",
-      "tags": [
-        "Management",
-        "Usage",
-        "Zhipu",
-        "GLM"
-      ],
-      "install": {
-        "type": "direct",
-        "artifacts": [
-          {
-            "goos": "darwin",
-            "goarch": "arm64",
-            "url": "https://github.com/RayenAlex/quota-center/releases/download/v0.2.1/quota-center_0.2.1_darwin_arm64.zip",
-            "sha256": "11ba4b7fd3631459bead41d1f078256b649746b34f9ce3c29d24d62760acaad0"
-          },
-          {
-            "goos": "linux",
-            "goarch": "amd64",
-            "url": "https://github.com/RayenAlex/quota-center/releases/download/v0.2.1/quota-center_0.2.1_linux_amd64.zip",
-            "sha256": "882a73af6a52721d48805bbe3f89c4702977152d54b5f86014eb8274ac72fe69"
-          }
-        ]
-      }
-    },
-    {
-      "id": "cpa-quota-warmup",
-      "name": "额度预热",
-      "description": "按计划发送极短请求预热 CPA 认证账号的 5 小时额度窗口。",
-      "author": "szxypi",
-      "version": "0.6.3",
-      "repository": "https://github.com/szxypi/cpa-quota-warmup",
-      "homepage": "https://github.com/szxypi/cpa-quota-warmup",
-      "license": "MIT",
-      "tags": [
-        "Quota",
-        "Warmup",
-        "Scheduling",
-        "Usage"
-      ],
-      "install": {
-        "type": "direct",
-        "artifacts": [
-          {
-            "goos": "linux",
-            "goarch": "amd64",
-            "url": "https://github.com/szxypi/cpa-quota-warmup/releases/download/v0.6.3/cpa-quota-warmup_0.6.3_linux_amd64.zip",
-            "sha256": "0f8ae046d6d6d40b26e206f9f685ec8c6d184691dd488f468ab7ed0da5dc1a3a"
-          },
-          {
-            "goos": "linux",
-            "goarch": "arm64",
-            "url": "https://github.com/szxypi/cpa-quota-warmup/releases/download/v0.6.3/cpa-quota-warmup_0.6.3_linux_arm64.zip",
-            "sha256": "1d5f2d6b7fe6617f0839d0e82c0b832110214830e9f5fdee4f772115e2f5bbf6"
-          }
-        ]
-      }
-    },
-    {
-      "id": "cpa-devin-prompt-compat",
-      "name": "Devin Prompt Compat",
-      "description": "为 Devin 模型请求替换会触发上游 403 content policy 的固定系统提示词措辞。",
-      "author": "Scottio",
-      "version": "0.1.1",
-      "repository": "https://github.com/szxypi/cpa-devin-prompt-compat",
-      "homepage": "https://github.com/szxypi/cpa-devin-prompt-compat",
-      "license": "MIT",
-      "tags": [
-        "Devin",
-        "Claude",
-        "Compatibility",
-        "Request Interceptor"
-      ],
-      "install": {
-        "type": "direct",
-        "artifacts": [
-          {
-            "goos": "linux",
-            "goarch": "amd64",
-            "url": "https://github.com/szxypi/cpa-devin-prompt-compat/releases/download/v0.1.1/cpa-devin-prompt-compat_0.1.1_linux_amd64.zip",
-            "sha256": "1019c52d8693ff7406e777643a75b333b2f60737280523acd670f5c7a58be41e"
-          },
-          {
-            "goos": "linux",
-            "goarch": "arm64",
-            "url": "https://github.com/szxypi/cpa-devin-prompt-compat/releases/download/v0.1.1/cpa-devin-prompt-compat_0.1.1_linux_arm64.zip",
-            "sha256": "428a8a94077050781d104f8b5b3aada35c963f9fe102d2c2fb48e285c44b3962"
-          }
-        ]
-      }
-    }
-  ]
+    "schema_version": 2,
+    "plugins": [
+        {
+            "id": "quota-center",
+            "name": "额度中心",
+            "description": "多供应商额度中心，查看智谱、MiniMax、方舟、Grok、Codex、Gemini 额度。",
+            "author": "rayen",
+            "version": "0.2.1",
+            "repository": "https://github.com/RayenAlex/quota-center",
+            "homepage": "https://github.com/RayenAlex/quota-center",
+            "license": "MIT",
+            "tags": [
+                "Management",
+                "Usage",
+                "Zhipu",
+                "GLM"
+            ],
+            "install": {
+                "type": "direct",
+                "artifacts": [
+                    {
+                        "goos": "darwin",
+                        "goarch": "arm64",
+                        "url": "https://github.com/RayenAlex/quota-center/releases/download/v0.2.1/quota-center_0.2.1_darwin_arm64.zip",
+                        "sha256": "11ba4b7fd3631459bead41d1f078256b649746b34f9ce3c29d24d62760acaad0"
+                    },
+                    {
+                        "goos": "linux",
+                        "goarch": "amd64",
+                        "url": "https://github.com/RayenAlex/quota-center/releases/download/v0.2.1/quota-center_0.2.1_linux_amd64.zip",
+                        "sha256": "882a73af6a52721d48805bbe3f89c4702977152d54b5f86014eb8274ac72fe69"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "cpa-quota-warmup",
+            "name": "额度预热",
+            "description": "按计划发送极短请求预热 CPA 认证账号的 5 小时额度窗口。",
+            "author": "szxypi",
+            "version": "0.6.3",
+            "repository": "https://github.com/szxypi/cpa-quota-warmup",
+            "homepage": "https://github.com/szxypi/cpa-quota-warmup",
+            "license": "MIT",
+            "tags": [
+                "Quota",
+                "Warmup",
+                "Scheduling",
+                "Usage"
+            ],
+            "install": {
+                "type": "direct",
+                "artifacts": [
+                    {
+                        "goos": "linux",
+                        "goarch": "amd64",
+                        "url": "https://github.com/szxypi/cpa-quota-warmup/releases/download/v0.6.3/cpa-quota-warmup_0.6.3_linux_amd64.zip",
+                        "sha256": "0f8ae046d6d6d40b26e206f9f685ec8c6d184691dd488f468ab7ed0da5dc1a3a"
+                    },
+                    {
+                        "goos": "linux",
+                        "goarch": "arm64",
+                        "url": "https://github.com/szxypi/cpa-quota-warmup/releases/download/v0.6.3/cpa-quota-warmup_0.6.3_linux_arm64.zip",
+                        "sha256": "1d5f2d6b7fe6617f0839d0e82c0b832110214830e9f5fdee4f772115e2f5bbf6"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "cpa-devin-prompt-compat",
+            "name": "Devin Prompt Compat",
+            "description": "为 Devin 模型请求替换会触发上游 403 content policy 的固定系统提示词措辞。",
+            "author": "Scottio",
+            "version": "0.1.1",
+            "repository": "https://github.com/szxypi/cpa-devin-prompt-compat",
+            "homepage": "https://github.com/szxypi/cpa-devin-prompt-compat",
+            "license": "MIT",
+            "tags": [
+                "Devin",
+                "Claude",
+                "Compatibility",
+                "Request Interceptor"
+            ],
+            "install": {
+                "type": "direct",
+                "artifacts": [
+                    {
+                        "goos": "linux",
+                        "goarch": "amd64",
+                        "url": "https://github.com/szxypi/cpa-devin-prompt-compat/releases/download/v0.1.1/cpa-devin-prompt-compat_0.1.1_linux_amd64.zip",
+                        "sha256": "1019c52d8693ff7406e777643a75b333b2f60737280523acd670f5c7a58be41e"
+                    },
+                    {
+                        "goos": "linux",
+                        "goarch": "arm64",
+                        "url": "https://github.com/szxypi/cpa-devin-prompt-compat/releases/download/v0.1.1/cpa-devin-prompt-compat_0.1.1_linux_arm64.zip",
+                        "sha256": "428a8a94077050781d104f8b5b3aada35c963f9fe102d2c2fb48e285c44b3962"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "cpa-cache-usage",
+            "name": "Cache Usage Injector",
+            "description": "为 /v1/messages 响应注入真实 prompt-cache 用量（cache_read_input_tokens/cache_creation_input_tokens），修复下游网关缓存命中率始终为 0 及缓存部分被按全价计费的问题。",
+            "author": "rayen",
+            "version": "0.1.0",
+            "repository": "https://github.com/rayenalex/cpa-cache-usage",
+            "homepage": "https://github.com/rayenalex/cpa-cache-usage",
+            "license": "MIT",
+            "tags": [
+                "Usage",
+                "Cache",
+                "Anthropic",
+                "Billing"
+            ],
+            "install": {
+                "type": "direct",
+                "artifacts": [
+                    {
+                        "goos": "linux",
+                        "goarch": "amd64",
+                        "url": "https://github.com/rayenalex/cpa-cache-usage/releases/download/v0.1.0/cpa-cache-usage_0.1.0_linux_amd64.zip",
+                        "sha256": "f50706f794c44bd87b1908208dafefba2cc744bd5681414ab3c755e79b4e6d2f"
+                    }
+                ]
+            }
+        }
+    ]
 }
