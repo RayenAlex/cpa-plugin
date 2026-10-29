@@ -1,6 +1,14 @@
 name: Sync CPA Quota Warmup
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/sync-cpa-quota-warmup.yml"
+      - "registry.json"
+      - "scripts/**"
+      - "tests/**"
   workflow_dispatch:
   schedule:
     - cron: "17 */6 * * *"

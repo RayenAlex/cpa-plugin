@@ -112,6 +112,34 @@ class RegistryArtifactTest(unittest.TestCase):
             ],
         )
 
+    def test_cache_usage_uses_upstream_v0_1_2_release_archive(self):
+        self.assertIn("cpa-cache-usage", self.plugins)
+        plugin = self.plugins["cpa-cache-usage"]
+        self.assertEqual(plugin["version"], "0.1.2")
+        self.assertEqual(
+            plugin["repository"], "https://github.com/rayenalex/cpa-cache-usage"
+        )
+        self.assertEqual(
+            plugin["install"],
+            {
+                "type": "direct",
+                "artifacts": [
+                    {
+                        "goos": "linux",
+                        "goarch": "amd64",
+                        "url": (
+                            "https://github.com/rayenalex/cpa-cache-usage/"
+                            "releases/download/v0.1.2/"
+                            "cpa-cache-usage_0.1.2_linux_amd64.zip"
+                        ),
+                        "sha256": (
+                            "980a866afd0759c959bf4d3d8c57f8829d9f763468215cf75c7a5dc3ee886b3a"
+                        ),
+                    }
+                ],
+            },
+        )
+
     def test_registry_checker_accepts_store_and_release_artifacts(self):
         result = subprocess.run(
             [
@@ -127,12 +155,17 @@ class RegistryArtifactTest(unittest.TestCase):
             text=True,
         )
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertIn("3 plugin(s), 6 artifact(s)", result.stdout)
+        self.assertIn("4 plugin(s), 7 artifact(s)", result.stdout)
 
     def test_store_contains_only_supported_standalone_plugin_entries(self):
         self.assertEqual(
             set(self.plugins),
-            {"quota-center", "cpa-quota-warmup", "cpa-devin-prompt-compat"},
+            {
+                "quota-center",
+                "cpa-quota-warmup",
+                "cpa-devin-prompt-compat",
+                "cpa-cache-usage",
+            },
         )
         self.assertFalse((self.root / "zhipu-quota").exists())
         self.assertFalse(
